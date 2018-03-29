@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.founder.zsy.founder.LoginActivity">
+
+    <include layout="@layout/toolbar_title" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/DIMEN_240PX">
+
+        <ImageView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/DIMEN_30PX"
+            android:src="@mipmap/login_icon_user_name" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/DIMEN_90PX"
+            android:layout_toRightOf="@+id/name"
+            android:hint="手机号">
+
+            <EditText
+                android:id="@+id/phone_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:maxLines="1"
+                android:textColor="@color/i333333"
+                android:textColorHint="@color/i666666"
+                android:textSize="16sp" />
+        </android.support.design.widget.TextInputLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/DIMEN_30PX">
+
+        <ImageView
+            android:id="@+id/paw1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/DIMEN_30PX"
+            android:src="@mipmap/login_icon_password" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/paw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/DIMEN_90PX"
+            android:layout_toRightOf="@+id/paw1"
+            android:hint="密码">
+
+            <EditText
+                android:id="@+id/paw_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:maxLength="14"
+                android:maxLines="1"
+                android:textColor="@color/i333333"
+                android:textColorHint="@color/i666666"
+                android:textSize="16sp" />
+        </android.support.design.widget.TextInputLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/DIMEN_64PX"
+        android:layout_marginRight="@dimen/DIMEN_64PX"
+        android:layout_marginTop="@dimen/DIMEN_160PX"
+        android:background="@drawable/ripple_login"
+        android:gravity="center"
+        android:paddingBottom="@dimen/DIMEN_24PX"
+        android:paddingTop="@dimen/DIMEN_24PX"
+        android:text="登录"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_marginTop="@dimen/DIMEN_20PX"
+        android:padding="@dimen/DIMEN_20PX"
+        android:layout_marginRight="@dimen/DIMEN_80PX"
+        android:id="@+id/login_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="注册"
+        android:textColor="@color/bgred"
+        android:textSize="16sp" />
+
+</LinearLayout>

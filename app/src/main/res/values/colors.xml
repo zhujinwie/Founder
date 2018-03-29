@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#ce000c</color>
+    <color name="status_bar_color">#20000000</color>
+    <color name="black">#000000</color><!--黑色 -->
+    <color name="white">#ffffff</color><!--白色 -->
+    <color name="transparent">#00000000</color><!--透明色 -->
+    <color name="gray_cc">#cccccc</color><!--灰色cc -->
+    <color name="gray_8f">#8f8f8f</color><!--灰色8f -->
+
+
+    <color name="bgred">#ce000c</color>
+    <color name="i929292">#929292</color>
+    <color name="i999999">#999999</color>
+    <color name="i666666">#666666</color>
+    <color name="i333333">#333333</color>
+    <color name="white40">#66ffffff</color>
+    <color name="money_red">#ff5b42</color>
+    <color name="fdcd71">#fdcd71</color>
+    <color name="i65b0f4">#65b0f4</color>
+    <color name="da3d46">#da3d46</color>
+    <color name="f6b10c">#f6b10c</color>
+    <color name="bcbcbc">#bcbcbc</color>
+    <color name="bg">#f5f5f9</color><!-- 背景色-->
+    <color name="line">#e5e5e5</color><!--分割线 -->
+    <color name="f15946">#f15946</color>
+    <color name="d9d9d9">#d9d9d9</color>
+    <color name="f8f8f8">#f8f8f8</color>
+    <color name="i0084ff">#0084ff</color>
+</resources>

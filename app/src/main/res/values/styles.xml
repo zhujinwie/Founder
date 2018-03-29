@@ -1,0 +1,42 @@
+<resources>
+
+    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar" type="text/css">
+        <item name="colorPrimary">@color/i333333</item>
+        <item name="colorPrimaryDark">@color/i333333</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+    </style>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="BaseAppTheme" type="text/css"/>
+    <style name="NoSpaceActionBarTheme" parent="Base.Widget.AppCompat.Toolbar">
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetStartWithNavigation">0dp</item>
+    </style>
+    <!--我—>item样式-->
+    <style name="myPersonal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/DIMEN_96PX</item>
+        <item name="android:textColor">@color/i333333</item>
+        <item name="android:paddingLeft">@dimen/DIMEN_32PX</item>
+        <item name="android:paddingRight">@dimen/DIMEN_32PX</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@color/white</item>
+    </style>
+    <style name="myPersonal_margin">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginRight">@dimen/DIMEN_46PX</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/i999999</item>
+    </style>
+    <style name="FabMenu">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="FabMenu.Buttons">
+        <item name="fab_size">mini</item>
+    </style>
+</resources>

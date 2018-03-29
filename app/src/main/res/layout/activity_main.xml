@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    tools:context="com.founder.zsy.founder.MainActivity">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/main_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_above="@+id/line"/>
+
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/DIMEN_1PX"
+        android:layout_above="@+id/main_tab_layout"
+        android:background="@color/line" />
+
+    <com.flyco.tablayout.CommonTabLayout
+        android:id="@+id/main_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/DIMEN_96PX"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        tl:tl_textSelectColor="#ce000c"
+        tl:tl_textUnselectColor="@color/i929292"
+        tl:tl_textsize="12sp" />
+    <include
+        android:layout_above="@+id/line"
+        layout="@layout/fab_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/DIMEN_32PX"
+        android:layout_marginRight="@dimen/DIMEN_32PX" />
+</RelativeLayout>
