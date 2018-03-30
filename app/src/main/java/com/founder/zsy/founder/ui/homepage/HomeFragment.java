@@ -1,7 +1,6 @@
 package com.founder.zsy.founder.ui.homepage;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
@@ -14,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.founder.zsy.founder.R;
-import com.founder.zsy.founder.ui.DetailsActivity;
+import com.founder.zsy.founder.bean.TotalEntity;
 import com.founder.zsy.founder.util.Code;
 
 import butterknife.BindView;
@@ -50,6 +49,8 @@ public class HomeFragment extends Fragment implements HomeContract.View{
     Unbinder unbinder;
     private String code;
 
+
+    private HomePresenter mPresenter;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -84,7 +85,8 @@ public class HomeFragment extends Fragment implements HomeContract.View{
                 if (text1Edit.getText().toString().trim().length() == 10) {
                     if (codeEdit.getText().toString().trim().equals(code)) {
                        if(card.getText().toString().trim().length()==18){
-                            startActivity(new Intent(getContext(),DetailsActivity.class));
+                           // startActivity(new Intent(getContext(),DetailsActivity.class));
+
                        }else {
                            Toast.makeText(getActivity(), "请输入正确的身份证号", Toast.LENGTH_SHORT).show();
                        }
@@ -99,12 +101,17 @@ public class HomeFragment extends Fragment implements HomeContract.View{
     }
 
     @Override
-    public void getPolicySuccess() {
+    public void getPolicySuccess(TotalEntity totalEntity) {
 
     }
 
     @Override
-    public void onError() {
+    public void showError(int code) {
+
+    }
+
+    @Override
+    public void showLoading() {
 
     }
 }

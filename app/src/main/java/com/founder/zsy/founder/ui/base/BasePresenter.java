@@ -8,18 +8,31 @@ public abstract class BasePresenter<V>   {
 
     public V mView;
 
-    protected  void attachView(V v){
+    public  void attachView(V v){
         mWeakRef=new WeakReference<>(v);
         mView=mWeakRef.get();
     }
 
-    protected  void detachView(){
+    public  void detachView(){
 
         if(mWeakRef!=null){
             mWeakRef.clear();
             mWeakRef=null;
         }
     }
+
+    public boolean isViewAttach(){
+
+        return mWeakRef != null && mWeakRef.get() != null;
+    }
+
+    public V getView(){
+
+        return mWeakRef == null ? null : mWeakRef.get();
+    }
+
+
+
 
 
 

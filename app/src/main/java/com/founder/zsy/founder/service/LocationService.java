@@ -8,7 +8,6 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.location.LocationClientOption.LocationMode;
 
 /**
- * 
  * @author baidu
  *
  */

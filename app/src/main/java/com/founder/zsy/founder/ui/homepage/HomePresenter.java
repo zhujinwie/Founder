@@ -9,7 +9,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class HomePresenter implements HomeContract.Presenter{
+public class HomePresenter extends HomeContract.Presenter{
 
     @Override
     public void getPolicy(Map<String,String> params) {
@@ -19,7 +19,7 @@ public class HomePresenter implements HomeContract.Presenter{
                 .subscribe(new Consumer<TotalEntity>() {
                     @Override
                     public void accept(TotalEntity totalEntity) throws Exception {
-
+                        mView.getPolicySuccess(totalEntity);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
@@ -31,9 +31,9 @@ public class HomePresenter implements HomeContract.Presenter{
     }
 
     @Override
-    public void getPolicy(String tel) {
+    public void getPolicy02(Map<String ,String> params) {
 
-        FoRetrofit.getRestApi().getPolicy(tel).observeOn(AndroidSchedulers.mainThread())
+        FoRetrofit.getRestApi().getPolicy02(params).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Consumer<TotalEntity>() {
                     @Override
@@ -47,6 +47,8 @@ public class HomePresenter implements HomeContract.Presenter{
                     }
                 });
     }
+
+
 
 
 }

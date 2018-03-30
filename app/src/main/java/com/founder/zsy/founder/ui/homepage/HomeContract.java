@@ -1,22 +1,26 @@
 package com.founder.zsy.founder.ui.homepage;
 
+import com.founder.zsy.founder.bean.TotalEntity;
+import com.founder.zsy.founder.ui.base.BasePresenter;
+
 import java.util.Map;
 
-public class HomeContract {
+public interface HomeContract {
 
     interface View {
 
-        void getPolicySuccess();
+        void getPolicySuccess(TotalEntity totalEntity);
 
-        void onError();
+        void showError(int code);
 
+        void showLoading();
     }
 
-    interface Presenter{
+    abstract class Presenter extends BasePresenter<View>{
 
-        void getPolicy(Map<String,String> params);
+        abstract void getPolicy(Map<String,String> params);
 
-        void getPolicy(String tel);
+        abstract void getPolicy02(Map<String,String> params);
     }
 
 

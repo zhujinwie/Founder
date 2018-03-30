@@ -21,10 +21,12 @@ import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.founder.zsy.founder.MyApp;
 import com.founder.zsy.founder.R;
-import com.founder.zsy.founder.util.SharedPreferencesUtils;
-import com.founder.zsy.founder.util.StatusBarCompat;
 import com.founder.zsy.founder.bean.TabEntity;
 import com.founder.zsy.founder.service.LocationService;
+import com.founder.zsy.founder.ui.homepage.HomeFragment;
+import com.founder.zsy.founder.ui.mine.MyFragment;
+import com.founder.zsy.founder.util.SharedPreferencesUtils;
+import com.founder.zsy.founder.util.StatusBarCompat;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 

@@ -70,6 +70,94 @@ public class PolicyEntity implements Serializable {
     @SerializedName("INSURED_BIRTHDAY")
     private String insuredBir;
 
+    @SerializedName("PAYTODATE")
+    private String payToDate;
+
+    @SerializedName("COVERAGE")
+    private String coverAge;
+
+    @SerializedName("LASTPAY_RESULT")
+    private String lastPayResult;
+
+    @SerializedName("RENEWAL_CARD")
+    private String renewalCard;
+
+    @SerializedName("PREMIUM")
+    private String premiun;
+
+    @SerializedName("FAIL_REASON")
+    private String failReason;
+
+    @SerializedName("INSTYPE_NAME")
+    private String instypeName;
+
+    @SerializedName("PAY_DATE")
+    private String payDate;
+
+    public String getPayToDate() {
+        return payToDate;
+    }
+
+    public void setPayToDate(String payToDate) {
+        this.payToDate = payToDate;
+    }
+
+    public String getCoverAge() {
+        return coverAge;
+    }
+
+    public void setCoverAge(String coverAge) {
+        this.coverAge = coverAge;
+    }
+
+    public String getLastPayResult() {
+        return lastPayResult;
+    }
+
+    public void setLastPayResult(String lastPayResult) {
+        this.lastPayResult = lastPayResult;
+    }
+
+    public String getRenewalCard() {
+        return renewalCard;
+    }
+
+    public void setRenewalCard(String renewalCard) {
+        this.renewalCard = renewalCard;
+    }
+
+    public String getPremiun() {
+        return premiun;
+    }
+
+    public void setPremiun(String premiun) {
+        this.premiun = premiun;
+    }
+
+    public String getFailReason() {
+        return failReason;
+    }
+
+    public void setFailReason(String failReason) {
+        this.failReason = failReason;
+    }
+
+    public String getInstypeName() {
+        return instypeName;
+    }
+
+    public void setInstypeName(String instypeName) {
+        this.instypeName = instypeName;
+    }
+
+    public String getPayDate() {
+        return payDate;
+    }
+
+    public void setPayDate(String payDate) {
+        this.payDate = payDate;
+    }
+
     public String getInsurerName() {
         return insurerName;
     }
@@ -190,6 +278,14 @@ public class PolicyEntity implements Serializable {
                 ", insurerBir='" + insurerBir + '\'' +
                 ", relationShip='" + relationShip + '\'' +
                 ", insuredBir='" + insuredBir + '\'' +
+                ", payToDate='" + payToDate + '\'' +
+                ", coverAge='" + coverAge + '\'' +
+                ", lastPayResult='" + lastPayResult + '\'' +
+                ", renewalCard='" + renewalCard + '\'' +
+                ", premiun='" + premiun + '\'' +
+                ", failReason='" + failReason + '\'' +
+                ", instypeName='" + instypeName + '\'' +
+                ", payDate='" + payDate + '\'' +
                 '}';
     }
 }

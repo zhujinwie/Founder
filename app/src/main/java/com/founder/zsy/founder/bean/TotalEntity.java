@@ -1,8 +1,10 @@
 package com.founder.zsy.founder.bean;
 
+import com.founder.zsy.founder.bean.base.PolicyEntity;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class TotalEntity implements Serializable {
 
@@ -13,7 +15,7 @@ public class TotalEntity implements Serializable {
     private String msg;
 
     @SerializedName("business")
-    private Business bus;
+    private List<PolicyEntity> bus;
 
     public int getStatus() {
         return status;
@@ -31,11 +33,11 @@ public class TotalEntity implements Serializable {
         this.msg = msg;
     }
 
-    public Business getBus() {
+    public List<PolicyEntity> getBus() {
         return bus;
     }
 
-    public void setBus(Business bus) {
+    public void setBus(List<PolicyEntity> bus) {
         this.bus = bus;
     }
 
