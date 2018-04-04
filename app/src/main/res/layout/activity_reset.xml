@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.reset.ResetActivity"
+    android:background="@color/white"
+    android:orientation="vertical"
+    >
+    <include layout="@layout/toolbar_title"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/DIMEN_120PX">
+
+        <ImageView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/DIMEN_30PX"
+            android:src="@mipmap/login_icon_user_name" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/agent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/DIMEN_90PX"
+            android:layout_toRightOf="@+id/name"
+            android:hint="工号">
+
+            <EditText
+                android:id="@+id/agent_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:maxLines="1"
+                android:textColor="@color/i333333"
+                android:textColorHint="@color/i666666"
+                android:textSize="16sp" />
+        </android.support.design.widget.TextInputLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/DIMEN_90PX"
+        android:layout_marginTop="@dimen/DIMEN_30PX"
+        android:id="@+id/code_rl"
+        >
+
+        <ImageView
+            android:id="@+id/icon_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/DIMEN_30PX"
+            android:src="@mipmap/code" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/icon_code"
+            android:hint="验证码">
+
+            <EditText
+                android:id="@+id/code_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="4"
+                android:maxLines="1"
+                android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:textColor="@color/i333333"
+                android:textColorHint="@color/i666666"
+                android:textSize="16sp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/showCode"
+            android:layout_width="@dimen/DIMEN_200PX"
+            android:layout_height="@dimen/DIMEN_80PX"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/DIMEN_30PX">
+
+        <ImageView
+            android:id="@+id/paw1_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/DIMEN_30PX"
+            android:src="@mipmap/login_icon_password" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/paw1_tl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/DIMEN_90PX"
+            android:layout_toRightOf="@+id/paw1_iv"
+            android:hint="设置新密码">
+
+            <EditText
+                android:id="@+id/paw1_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:maxLength="14"
+                android:maxLines="1"
+                android:textColor="@color/i333333"
+                android:textColorHint="@color/i666666"
+                android:textSize="16sp" />
+        </android.support.design.widget.TextInputLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/DIMEN_30PX">
+
+        <ImageView
+            android:id="@+id/paw2_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/DIMEN_30PX"
+            android:src="@mipmap/login_icon_password" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/paw2_tl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/DIMEN_90PX"
+            android:layout_toRightOf="@+id/paw2_iv"
+            android:hint="确认密码">
+
+            <EditText
+                android:id="@+id/paw2_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:maxLength="14"
+                android:maxLines="1"
+                android:textColor="@color/i333333"
+                android:textColorHint="@color/i666666"
+                android:textSize="16sp" />
+        </android.support.design.widget.TextInputLayout>
+    </RelativeLayout>
+
+
+    <TextView
+
+        android:id="@+id/reset"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/DIMEN_64PX"
+        android:layout_marginRight="@dimen/DIMEN_64PX"
+        android:layout_marginTop="@dimen/DIMEN_160PX"
+        android:background="@drawable/ripple_login"
+        android:gravity="center"
+        android:paddingBottom="@dimen/DIMEN_24PX"
+        android:paddingTop="@dimen/DIMEN_24PX"
+        android:text="重置密码"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+</LinearLayout>

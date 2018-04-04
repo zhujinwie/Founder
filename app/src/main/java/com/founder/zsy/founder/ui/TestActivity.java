@@ -137,8 +137,7 @@ public class TestActivity extends AppCompatActivity {
 
         Log.d("Test","保单号测试！");
         final Map<String, String> params = new HashMap<>();
-        params.put("INSURE_NO", edit01.getText().toString());
-        params.put("INSURERID", edit02.getText().toString());
+        params.put("insureNo", edit01.getText().toString());
 
         FoRetrofit.getRestApi().getPolicy(params).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -167,7 +166,7 @@ public class TestActivity extends AppCompatActivity {
         Map<String,String > params=new HashMap<>();
         params.put("page",page);
         params.put("page_size",size);
-        params.put("INSURERNAME",name);
+        params.put("insurerName",name);
         FoRetrofit.getRestApi().getPolicy02(params)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -202,7 +201,7 @@ public class TestActivity extends AppCompatActivity {
                 .subscribe(new Consumer<LoginEntity>() {
                     @Override
                     public void accept(LoginEntity loginEntity) throws Exception {
-                        resultTv.setText("登陸陳公公");
+                        resultTv.setText(loginEntity.toString());
                         Toast.makeText(TestActivity.this, "登录成功你那个！", Toast.LENGTH_SHORT).show();
                         Log.d("Test","login="+loginEntity.toString());
                     }

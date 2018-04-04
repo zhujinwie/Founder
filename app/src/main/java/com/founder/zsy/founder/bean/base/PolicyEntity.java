@@ -94,6 +94,17 @@ public class PolicyEntity implements Serializable {
     @SerializedName("PAY_DATE")
     private String payDate;
 
+    @SerializedName("INS_STATE")
+    private String insState;
+
+    public String getInsState() {
+        return insState;
+    }
+
+    public void setInsState(String insState) {
+        this.insState = insState;
+    }
+
     public String getPayToDate() {
         return payToDate;
     }
@@ -286,6 +297,7 @@ public class PolicyEntity implements Serializable {
                 ", failReason='" + failReason + '\'' +
                 ", instypeName='" + instypeName + '\'' +
                 ", payDate='" + payDate + '\'' +
+                ", insState='" + insState + '\'' +
                 '}';
     }
 }

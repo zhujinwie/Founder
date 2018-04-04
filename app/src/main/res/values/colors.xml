@@ -10,6 +10,15 @@
     <color name="gray_cc">#cccccc</color><!--灰色cc -->
     <color name="gray_8f">#8f8f8f</color><!--灰色8f -->
 
+    <color name="text_grey">#9DA0A3</color>
+    <color name="text_blue">#5593bc</color>
+    <color name="text_black">#000000</color>
+
+
+    <color name="purple_500">#9C27B0</color>
+    <color name="blue_500">#2196F3</color>
+    <color name="pink_500">#E91E63</color>
+
 
     <color name="bgred">#ce000c</color>
     <color name="i929292">#929292</color>

@@ -14,6 +14,8 @@ public interface HomeContract {
         void showError(int code);
 
         void showLoading();
+
+        void onComplete();
     }
 
     abstract class Presenter extends BasePresenter<View>{

@@ -2,12 +2,18 @@ package com.founder.zsy.founder.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
+
+import com.google.gson.Gson;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
 public class SharedPreferencesUtils {
+
+    static Gson gson=new Gson();
+
     public SharedPreferencesUtils() {
         /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");
@@ -47,6 +53,40 @@ public class SharedPreferencesUtils {
 
         SharedPreferencesCompat.apply(editor);
     }
+
+    /**
+     *保存对象的方法
+     *
+     * **/
+    public static void putObject(Context context,String key,Object object){
+
+            String json=gson.toJson(object);
+            put(context,key,json);
+
+    }
+
+
+    /**
+     *提取对象
+     *
+     * **/
+    public static <T>  T getObject(Context context,String key,Class<?> t){
+        String str= (String) get(context,key,"");
+
+        try{
+           if(!TextUtils.isEmpty(str)){
+               return (T)gson.fromJson(str,t);
+           }
+        }catch (Exception e){
+
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
+
 
     /**
      * 得到保存数据的方法，我们根据默认值得到保存的数据的具体类型，然后调用相对于的方法获取值

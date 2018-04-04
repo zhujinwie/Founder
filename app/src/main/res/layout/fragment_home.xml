@@ -8,11 +8,49 @@
 
     <include layout="@layout/toolbar_title" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/policy_style"
+            android:text="保单号查询"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:padding="8dp"
+            android:textColor="@color/white"
+            android:background="@drawable/tv_left_cornor_red"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/name_style"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:text="姓名快速查询"
+            android:textSize="16sp"
+            android:padding="8dp"
+            android:textColor="@color/colorAccent"
+            android:background="@drawable/tv_right_cornor_white"
+            />
+
+    </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/DIMEN_90PX"
-        android:layout_marginTop="@dimen/DIMEN_40PX">
+        android:layout_marginTop="@dimen/DIMEN_40PX"
+        android:id="@+id/policy_rl"
+        >
 
         <ImageView
             android:id="@+id/paw1"
@@ -33,7 +71,6 @@
                 android:id="@+id/text1_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
                 android:maxLength="10"
                 android:maxLines="1"
                 android:textColor="@color/i333333"
@@ -42,11 +79,50 @@
         </android.support.design.widget.TextInputLayout>
     </RelativeLayout>
 
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/DIMEN_90PX"
-        android:layout_marginTop="@dimen/DIMEN_30PX">
+        android:layout_marginTop="@dimen/DIMEN_40PX"
+        android:id="@+id/name_rl"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:id="@+id/paw2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/DIMEN_30PX"
+            android:src="@mipmap/name" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/paw2"
+            android:hint="姓名">
+
+            <EditText
+                android:id="@+id/text2_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:textColor="@color/i333333"
+                android:textColorHint="@color/i666666"
+                android:textSize="16sp" />
+        </android.support.design.widget.TextInputLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/DIMEN_90PX"
+        android:layout_marginTop="@dimen/DIMEN_30PX"
+        android:id="@+id/code_rl"
+        >
 
         <ImageView
             android:id="@+id/icon_code"
@@ -84,42 +160,6 @@
             android:layout_alignParentRight="true"
             />
     </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/DIMEN_90PX"
-        android:layout_marginTop="@dimen/DIMEN_30PX">
-
-        <ImageView
-            android:id="@+id/text2_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/DIMEN_30PX"
-            android:src="@mipmap/image1" />
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/text2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-
-            android:layout_toRightOf="@+id/text2_icon"
-            android:hint="身份证号">
-
-            <EditText
-                android:id="@+id/card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:digits="0123456789X"
-                android:maxLength="18"
-                android:maxLines="1"
-                android:textColor="@color/i333333"
-                android:textColorHint="@color/i666666"
-                android:textSize="16sp" />
-        </android.support.design.widget.TextInputLayout>
-    </RelativeLayout>
-
     <TextView
         android:id="@+id/select"
         android:layout_width="match_parent"
@@ -134,4 +174,17 @@
         android:text="查询"
         android:textColor="@color/white"
         android:textSize="16sp" />
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/DIMEN_64PX"
+        android:layout_marginRight="@dimen/DIMEN_64PX"
+        android:layout_marginTop="@dimen/DIMEN_160PX"
+        android:paddingBottom="@dimen/DIMEN_24PX"
+        android:paddingTop="@dimen/DIMEN_24PX"
+        android:visibility="invisible"/>
+
 </LinearLayout>

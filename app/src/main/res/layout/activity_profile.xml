@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.founder.zsy.founder.ui.profile.ProfileActivity">
+
+    <include layout="@layout/toolbar_title" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="14dp"
+        android:background="@color/bg"
+        />
+    <RelativeLayout
+        style="@style/myWeiXin"
+        android:layout_height="80dp"
+        android:id="@+id/pwl"
+        >
+        <TextView
+            style="@style/TitleStyle"
+            android:text="头像"
+            />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/port"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/photo_avatar"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line"
+        />
+    <RelativeLayout
+        style="@style/myWeiXin"
+        android:id="@+id/name"
+        >
+        <TextView
+            style="@style/TitleStyle"
+            android:text="名字"
+            />
+        <TextView
+            style="@style/TitleStyle"
+            android:textColor="@color/text_grey"
+            android:text="你的名字"
+            android:layout_alignParentRight="true"
+            android:id="@+id/name_tv"
+            />
+    </RelativeLayout>
+       <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line"/>
+    <RelativeLayout
+        style="@style/myWeiXin"
+        android:id="@+id/email"
+        >
+
+        <TextView
+            style="@style/TitleStyle"
+            android:text="邮箱"
+            />
+
+        <TextView
+            style="@style/TitleStyle"
+            android:text="5201314@love.com"
+            android:id="@+id/email_tv"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/text_grey"
+            />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line"/>
+    <RelativeLayout
+        style="@style/myWeiXin"
+        android:id="@+id/tel"
+        >
+
+        <TextView
+            style="@style/TitleStyle"
+            android:text="电话"
+            />
+
+        <TextView
+            style="@style/TitleStyle"
+            android:text="52013141314"
+            android:id="@+id/tel_tv"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/text_grey"
+            />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line"/>
+
+    <RelativeLayout
+        style="@style/myWeiXin"
+        android:id="@+id/office"
+        >
+        <TextView
+            style="@style/TitleStyle"
+            android:text="部门"
+            />
+        <TextView
+            style="@style/TitleStyle"
+            android:text="总裁办公室"
+            android:id="@+id/office_tv"
+            android:textColor="@color/text_grey"
+            android:layout_alignParentRight="true"
+            />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="14dp"
+        android:background="@color/bg"/>
+
+    <TextView
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/DIMEN_64PX"
+        android:layout_marginRight="@dimen/DIMEN_64PX"
+        android:layout_marginTop="@dimen/DIMEN_160PX"
+        android:background="@drawable/ripple_login"
+        android:gravity="center"
+        android:paddingBottom="@dimen/DIMEN_16PX"
+        android:paddingTop="@dimen/DIMEN_16PX"
+        android:text="退出账号"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+
+</LinearLayout>

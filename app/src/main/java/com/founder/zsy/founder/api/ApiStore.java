@@ -16,7 +16,7 @@ public interface ApiStore {
      * @param params  保单号与 身份证号
      * @return 包含状态码的保单信息
      * **/
-    @POST("Personal/find")
+    @POST("Personal/find.do")
     Flowable<TotalEntity> getPolicy(@QueryMap Map<String,String> params);
 
     /**
@@ -24,24 +24,33 @@ public interface ApiStore {
      * @param params 投保人姓名 頁碼 頁數
      * @return 包含状态码的保单信息
      * **/
-    @POST("Personal/find")
+    @POST("Personal/find.do")
     Flowable<TotalEntity> getPolicy02(@QueryMap Map<String,String> params);
 
 
     /**
      * 上传 定位坐标
      *
-     * @param  params 经纬度，agentId
+     * @param  params 经纬度，agentId, desc
      * @return
      * **/
-    @POST("Agent/getLocation")
+    @POST("Agent/getLocation.do")
     Flowable<String> uploadLaLn(@QueryMap Map<String,String> params);
 
     /**
      * 登录
-     *
+     * @param params
      * **/
-    @POST("Agent/login")
+    @POST("Agent/login.do")
     Flowable<LoginEntity> login(@QueryMap Map<String,String> params);
+
+    /**
+     * 修改密码
+     * @param params agentId,password,macId,tel
+     * **/
+    @POST("Agent/Upassword.do")
+    Flowable<LoginEntity> updatePwd(@QueryMap Map<String,String> params);
+
+
 
 }

@@ -15,18 +15,19 @@ import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
-import com.baidu.location.Poi;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.founder.zsy.founder.MyApp;
 import com.founder.zsy.founder.R;
+import com.founder.zsy.founder.bean.LocationBean;
 import com.founder.zsy.founder.bean.TabEntity;
 import com.founder.zsy.founder.service.LocationService;
 import com.founder.zsy.founder.ui.homepage.HomeFragment;
+import com.founder.zsy.founder.ui.login.LoginActivity;
 import com.founder.zsy.founder.ui.mine.MyFragment;
-import com.founder.zsy.founder.util.SharedPreferencesUtils;
 import com.founder.zsy.founder.util.StatusBarCompat;
+import com.founder.zsy.founder.util.UserInfoHelper;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
@@ -50,7 +51,6 @@ import permissions.dispatcher.RuntimePermissions;
 public class MainActivity extends AppCompatActivity {
 
     private LocationService locationService;
-
     @BindView(R.id.main_tab_layout)
     CommonTabLayout tabLayout;
     @BindView(R.id.begin)
@@ -68,8 +68,7 @@ public class MainActivity extends AppCompatActivity {
     //当前展示的Fragment的位置
     private int currentIndex = 0;
     private Unbinder bind;
-    private boolean type = false;
-
+    private boolean type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,9 +144,29 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick({R.id.begin, R.id.stop})
     public void onViewClicked(View view) {
+
+        if(!UserInfoHelper.isLogin(this)){
+
+            new android.app.AlertDialog.Builder(this)
+                    .setTitle("请先登录！")
+                    .setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            return;
+                        }
+                    })
+                    .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        }
+                    }).show();
+        }
+
+
         switch (view.getId()) {
             case R.id.begin:
-                    if (SharedPreferencesUtils.contains(this, "type")) {
+
                         if (!type) {
                             MainActivityPermissionsDispatcher.needWithCheck(this);
                             type = true;
@@ -155,12 +174,10 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(this, "正在定位,请不要重复开启。", Toast.LENGTH_SHORT).show();
                         }
-                    } else {
-                        startActivity(new Intent(this, LoginActivity.class));
-                    }
+
                 break;
             case R.id.stop:
-                if (SharedPreferencesUtils.contains(this, "type")) {
+
                     if (type) {
                         locationService.stop();
                         type = false;
@@ -168,9 +185,7 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         Toast.makeText(this, "请开启定位", Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    startActivity(new Intent(this, LoginActivity.class));
-                }
+
                 break;
         }
         menu.toggle(false);
@@ -220,18 +235,22 @@ public class MainActivity extends AppCompatActivity {
                     Log.e("123123", "纬度" + location.getLocType() + "--经度" + location.getLongitude());
                 }
                 StringBuffer sb = new StringBuffer(256);
-                sb.append("time : ");
+                LocationBean locationBean=new LocationBean();
+                locationBean.setLa(location.getLatitude()+"");
+                locationBean.setLn(location.getLongitude()+"");
+
+                //sb.append("time : ");
                 /**
                  * 时间也可以使用systemClock.elapsedRealtime()方法 获取的是自从开机以来，每次回调的时间；
                  * location.getTime() 是指服务端出本次结果的时间，如果位置不发生变化，则时间不变
                  */
-                sb.append(location.getTime());
+                //sb.append(location.getTime());
 //                sb.append("\n定位类型 : ");// 定位类型
 //                sb.append(location.getLocType());
-                sb.append("\n纬度 : ");// 纬度
-                sb.append(location.getLatitude());
-                sb.append("\n经度 : ");// 经度
-                sb.append(location.getLongitude());
+                //sb.append("\n纬度 : ");// 纬度
+                //sb.append(location.getLatitude());
+                //sb.append("\n经度 : ");// 经度
+                //sb.append(location.getLongitude());
 //                sb.append("\n半径 : ");// 半径
 //                sb.append(location.getRadius());
 //                sb.append("\n国家码 : ");// 国家码
@@ -246,19 +265,19 @@ public class MainActivity extends AppCompatActivity {
 //                sb.append(location.getDistrict());
 //                sb.append("\n街道 : ");// 街道
 //                sb.append(location.getStreet());
-                sb.append("\n地址信息 : ");// 地址信息
-                sb.append(location.getAddrStr());
+                //sb.append("\n地址信息 : ");// 地址信息
+               // sb.append(location.getAddrStr());
 //                sb.append("\n方向: ");
 //                sb.append(location.getDirection());// 方向
-                sb.append("\n位置语义化信息: ");
-                sb.append(location.getLocationDescribe());// 位置语义化信息
-                sb.append("\nPOI信息: ");// POI信息
-                if (location.getPoiList() != null && !location.getPoiList().isEmpty()) {
+               // sb.append("\n位置语义化信息: ");
+               // sb.append(location.getLocationDescribe());// 位置语义化信息
+                //sb.append("\nPOI信息: ");// POI信息
+              /*  if (location.getPoiList() != null && !location.getPoiList().isEmpty()) {
                     for (int i = 0; i < location.getPoiList().size(); i++) {
                         Poi poi = (Poi) location.getPoiList().get(i);
                         sb.append(poi.getName() + ";");
                     }
-                }
+                }*/
 //                if (location.getLocType() == BDLocation.TypeGpsLocation) {// GPS定位结果
 //                    sb.append("\n速度 : ");
 //                    sb.append(location.getSpeed());// 速度 单位：km/h
@@ -283,20 +302,21 @@ public class MainActivity extends AppCompatActivity {
 //                    sb.append("离线定位成功，离线定位结果也是有效的");
 //                } else
                 if (location.getLocType() == BDLocation.TypeServerError) {
-                    sb.append("\ndescribe : ");
-                    sb.append("服务端网络定位失败，可以反馈IMEI号和大体定位时间到loc-bugs@baidu.com，会有人追查原因");
+                    //sb.append("\ndescribe : ");
+                    //sb.append("服务端网络定位失败，可以反馈IMEI号和大体定位时间到loc-bugs@baidu.com，会有人追查原因");
+                    locationBean.setException(1);
                 } else if (location.getLocType() == BDLocation.TypeNetWorkException) {
-                    sb.append("\ndescribe : ");
-                    sb.append("网络不同导致定位失败，请检查网络是否通畅");
+                   // sb.append("\ndescribe : ");
+                   // sb.append("网络不同导致定位失败，请检查网络是否通畅");
+                    locationBean.setException(2);
                 } else if (location.getLocType() == BDLocation.TypeCriteriaException) {
-                    sb.append("\ndescribe : ");
-                    sb.append("无法获取有效定位依据导致定位失败，一般是由于手机的原因，处于飞行模式下一般会造成这种结果，可以试着重启手机");
+                    //sb.append("\ndescribe : ");
+                    //sb.append("无法获取有效定位依据导致定位失败，一般是由于手机的原因，处于飞行模式下一般会造成这种结果，可以试着重启手机");
+                    locationBean.setException(3);
                 }
-                EventBus.getDefault().postSticky(sb.toString());
+                EventBus.getDefault().postSticky(locationBean);
             }
         }
     };
-
-
 
 }

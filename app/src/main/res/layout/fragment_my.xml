@@ -1,8 +1,9 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context="com.founder.zsy.founder.MyFragment">
+    android:orientation="vertical"
+    >
 
     <RelativeLayout
         android:id="@+id/parent2"
@@ -34,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/img"
-                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/DIMEN_30PX"
                 android:text="@string/name"
                 android:textColor="@color/white"
@@ -42,14 +43,4 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/parent2"
-        android:background="@color/bg"
-        android:scrollbars="vertical">
-
-    </android.support.v7.widget.RecyclerView>
-
-</RelativeLayout>
+</LinearLayout>

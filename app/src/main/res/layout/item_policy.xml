@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:background="#89EAEAEA"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="保单号"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:background="@drawable/img"
+                    android:layout_gravity="center_vertical"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="86898565032"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/item_number"
+                    />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/line"
+                />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/myPersonal"
+                    android:text="保险产品名称" />
+
+                <TextView
+                    style="@style/myPersonal_margin"
+                    android:text="机动车商业行业示范汽车保险"
+                    android:id="@+id/item_policy_type"
+                    />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/DIMEN_1PX"
+                android:layout_marginLeft="@dimen/DIMEN_32PX"
+                android:layout_marginStart="@dimen/DIMEN_32PX"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/myPersonal"
+                    android:text="投保人名称" />
+
+                <TextView
+                    style="@style/myPersonal_margin"
+                    android:text="赵某某"
+                    android:id="@+id/item_insurer_name"
+                    />
+            </RelativeLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/DIMEN_1PX"
+                android:layout_marginLeft="@dimen/DIMEN_32PX"
+                android:layout_marginStart="@dimen/DIMEN_32PX"
+                android:background="@color/line" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/myPersonal"
+                    android:text="被保人名称" />
+
+                <TextView
+                    style="@style/myPersonal_margin"
+                    android:text="赵某某"
+                    android:id="@+id/item_insured_name"
+                    />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/DIMEN_1PX"
+                android:layout_marginLeft="@dimen/DIMEN_32PX"
+                android:layout_marginStart="@dimen/DIMEN_32PX"
+                android:background="@color/line" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/DIMEN_10PX"
+                android:background="@color/bg" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/myPersonal"
+                    android:text="承保人" />
+
+                <TextView
+                    style="@style/myPersonal_margin"
+                    android:text="老李"
+                    android:id="@+id/item_agent_name"
+                    />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/DIMEN_1PX"
+                android:layout_marginLeft="@dimen/DIMEN_32PX"
+                android:layout_marginStart="@dimen/DIMEN_32PX"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/myPersonal"
+                    android:text="保单状态" />
+
+                <TextView
+                    style="@style/myPersonal_margin"
+                    android:text="有效" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/DIMEN_1PX"
+                android:layout_marginLeft="@dimen/DIMEN_32PX"
+                android:layout_marginStart="@dimen/DIMEN_32PX"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/myPersonal"
+                    android:text="缴费对用日" />
+
+                <TextView
+                    style="@style/myPersonal_margin"
+                    android:text="从2017-01-01到2018-01-01"
+                    android:id="@+id/item_pay_to_date"
+                    />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/DIMEN_1PX"
+                android:layout_marginLeft="@dimen/DIMEN_32PX"
+                android:layout_marginStart="@dimen/DIMEN_32PX"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/myPersonal"
+                    android:text="保费" />
+
+                <TextView
+                    style="@style/myPersonal_margin"
+                    android:text="1200"
+                    android:id="@+id/item_premium"
+                    />
+
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/DIMEN_1PX"
+                android:layout_marginLeft="@dimen/DIMEN_32PX"
+                android:layout_marginStart="@dimen/DIMEN_32PX"
+                android:background="@color/line" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <TextView
+                    style="@style/myPersonal"
+                    android:text="续期缴费账号" />
+
+                <TextView
+                    style="@style/myPersonal_margin"
+                    android:text="520131413141314"
+                    android:id="@+id/item_account"
+                    />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/DIMEN_1PX"
+                android:layout_marginLeft="@dimen/DIMEN_32PX"
+                android:layout_marginStart="@dimen/DIMEN_32PX"
+                android:background="@color/line" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    style="@style/myPersonal"
+                    android:text="最后一次还款结果" />
+
+                <TextView
+                    style="@style/myPersonal_margin"
+                    android:text="成功"
+                    android:id="@+id/item_last_time"
+                    />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/DIMEN_1PX"
+                android:layout_marginLeft="@dimen/DIMEN_32PX"
+                android:layout_marginStart="@dimen/DIMEN_32PX"
+                android:background="@color/line" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    style="@style/myPersonal"
+                    android:text="不成功原因" />
+
+                <TextView
+                    style="@style/myPersonal_margin"
+                    android:text="未缴费"
+                    android:id="@+id/item_last_time_reason"
+                    />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/DIMEN_2PX"
+                android:layout_marginLeft="@dimen/DIMEN_32PX"
+                android:layout_marginStart="@dimen/DIMEN_32PX"
+                android:background="@color/line" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/DIMEN_20PX"
+                android:background="@color/bg" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+
+</android.support.constraint.ConstraintLayout>
