@@ -89,7 +89,7 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         UserInfoHelper.clearUserInfo(ProfileActivity.this);
-                        EventBus.getDefault().postSticky("logout!");
+                        EventBus.getDefault().post("logout!");
                         finish();
                     }
                 }).show();

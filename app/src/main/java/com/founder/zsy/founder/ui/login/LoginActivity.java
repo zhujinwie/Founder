@@ -105,7 +105,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             showError(1);
         else{
             UserInfoHelper.setUserInfo(this,loginEntity.getProfile());
-            EventBus.getDefault().postSticky("login!");
+            EventBus.getDefault().post("login!");
             Toast.makeText(this, "登录成功！正在跳转...", Toast.LENGTH_SHORT).show();
             finish();
         }

@@ -108,7 +108,6 @@ public class MyFragment extends Fragment implements MineContract.View {
             params.put("agentId",UserInfoHelper.getCurrentUser(getContext()).getAgentId());
             params.put("lat",bean.getLa());
             params.put("lng",bean.getLn());
-            params.put("desc",bean.getDesc());
             presenter.uploadLaLn(params);
         }
     }

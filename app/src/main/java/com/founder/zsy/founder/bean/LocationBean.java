@@ -7,11 +7,10 @@ import java.io.Serializable;
  */
 public class LocationBean implements Serializable{
 
-    private String desc; //位置描述
+
     private String la; // 纬度
     private String ln; // 经度
     private int exception;// 0: OK
-
     // 1 :server error , 2: network error , 3: phone error
 
     public String getLa() {
@@ -38,19 +37,10 @@ public class LocationBean implements Serializable{
         this.exception = exception;
     }
 
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
     @Override
     public String toString() {
         return "LocationBean{" +
-                "desc='" + desc + '\'' +
-                ", la='" + la + '\'' +
+                "la='" + la + '\'' +
                 ", ln='" + ln + '\'' +
                 ", exception=" + exception +
                 '}';
