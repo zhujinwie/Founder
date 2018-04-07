@@ -15,6 +15,9 @@ import android.widget.Toast;
 import com.founder.zsy.founder.R;
 import com.founder.zsy.founder.bean.LoginEntity;
 import com.founder.zsy.founder.ui.RegisterActivity;
+import com.founder.zsy.founder.ui.reset.ResetActivity;
+import com.founder.zsy.founder.util.IMEIUtil;
+import com.founder.zsy.founder.util.MD5Util;
 import com.founder.zsy.founder.util.StatusBarCompat;
 import com.founder.zsy.founder.util.UserInfoHelper;
 
@@ -44,6 +47,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     @BindView(R.id.progressbar)
     ProgressBar progressBar;
 
+    @BindView(R.id.reset_tv)
+    TextView resetTv;
     private Unbinder bind;
 
     private LoginPresenter presenter;
@@ -74,7 +79,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         presenter.detachView();
     }
 
-    @OnClick({R.id.login_register, R.id.login})
+    @OnClick({R.id.login_register, R.id.login,R.id.reset_tv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.login_register:
@@ -86,13 +91,20 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                             && pawEdit.getText().toString().trim().length() != 0) {
 
                         Map<String,String> params=new HashMap<>();
-                        params.put("tel",phoneEdit.getText().toString().trim());
-                        params.put("password", pawEdit.getText().toString().trim());
+                        params.put("tel", MD5Util.encrypt32(phoneEdit.getText().toString().trim()));
+                        params.put("password", MD5Util.encrypt32(pawEdit.getText().toString().trim()));
+                        params.put("macId",MD5Util.encrypt32(IMEIUtil.getIMEI(LoginActivity.this)));
                         presenter.login(params);
                         showLoading();
                     } else {
                         Toast.makeText(this, "请输入正确的账户或密码", Toast.LENGTH_SHORT).show();
                     }
+                break;
+
+            case R.id.reset_tv:
+
+                startActivity(new Intent(LoginActivity.this, ResetActivity.class));
+                finish();
                 break;
         }
     }
@@ -109,7 +121,6 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             Toast.makeText(this, "登录成功！正在跳转...", Toast.LENGTH_SHORT).show();
             finish();
         }
-
 
     }
 

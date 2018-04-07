@@ -24,7 +24,10 @@ public class ResetPresenter extends ResetContract.Presenter {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
 
-
+                        if(throwable.getMessage().contains("404"))
+                            mView.showError(1);
+                        else
+                            mView.showError(2);
                     }
                 });
     }

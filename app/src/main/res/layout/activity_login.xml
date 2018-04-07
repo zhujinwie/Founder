@@ -46,7 +46,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/DIMEN_30PX">
+        android:layout_marginTop="@dimen/DIMEN_30PX"
+        >
 
         <ImageView
             android:id="@+id/paw1"
@@ -74,7 +75,18 @@
                 android:textColor="@color/i333333"
                 android:textColorHint="@color/i666666"
                 android:textSize="16sp" />
+
         </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/reset_tv"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_alignEnd="@+id/paw"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:text="忘记密码" />
+
     </RelativeLayout>
 
     <TextView

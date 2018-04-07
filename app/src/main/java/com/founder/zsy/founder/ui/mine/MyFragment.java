@@ -18,6 +18,7 @@ import com.founder.zsy.founder.R;
 import com.founder.zsy.founder.bean.LocationBean;
 import com.founder.zsy.founder.ui.login.LoginActivity;
 import com.founder.zsy.founder.ui.profile.ProfileActivity;
+import com.founder.zsy.founder.util.MD5Util;
 import com.founder.zsy.founder.util.UserInfoHelper;
 
 import org.greenrobot.eventbus.EventBus;
@@ -105,7 +106,7 @@ public class MyFragment extends Fragment implements MineContract.View {
         }else{
             params.clear();
             Log.d("Test","agentId="+UserInfoHelper.getCurrentUser(getContext()).getAgentId());
-            params.put("agentId",UserInfoHelper.getCurrentUser(getContext()).getAgentId());
+            params.put("agentId", MD5Util.encrypt32(UserInfoHelper.getCurrentUser(getContext()).getAgentId()));
             params.put("lat",bean.getLa());
             params.put("lng",bean.getLn());
             presenter.uploadLaLn(params);
