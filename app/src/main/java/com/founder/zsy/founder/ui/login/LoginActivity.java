@@ -15,6 +15,9 @@ import android.widget.Toast;
 import com.founder.zsy.founder.R;
 import com.founder.zsy.founder.bean.LoginEntity;
 import com.founder.zsy.founder.ui.RegisterActivity;
+import com.founder.zsy.founder.ui.reset.ResetActivity;
+import com.founder.zsy.founder.util.IDUtil;
+import com.founder.zsy.founder.util.MD5Util;
 import com.founder.zsy.founder.util.StatusBarCompat;
 import com.founder.zsy.founder.util.UserInfoHelper;
 
@@ -43,9 +46,12 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     TextInputLayout paw;
     @BindView(R.id.progressbar)
     ProgressBar progressBar;
+    @BindView(R.id.reset_tv)
+    TextView resetTv;
+
 
     private Unbinder bind;
-
+    private IDUtil idUtil;
     private LoginPresenter presenter;
 
     @Override
@@ -64,6 +70,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         });
         presenter=new LoginPresenter();
         presenter.attachView(this);
+        idUtil=new IDUtil();
 
     }
 
@@ -74,7 +81,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         presenter.detachView();
     }
 
-    @OnClick({R.id.login_register, R.id.login})
+    @OnClick({R.id.login_register, R.id.login,R.id.reset_tv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.login_register:
@@ -86,13 +93,24 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                             && pawEdit.getText().toString().trim().length() != 0) {
 
                         Map<String,String> params=new HashMap<>();
-                        params.put("tel",phoneEdit.getText().toString().trim());
-                        params.put("password", pawEdit.getText().toString().trim());
+                        //params.put("tel",phoneEdit.getText().toString().trim());
+                        //params.put("password", pawEdit.getText().toString().trim());
+                        params.put("tel", MD5Util.getMD5_32_Value(phoneEdit.getText().toString().trim()));
+                        params.put("password",MD5Util.getMD5_32_Value(pawEdit.getText().toString().trim()));
+                        params.put("macId",MD5Util.getMD5_32_Value(idUtil.getUUID(this)));
+                        Log.d("Test","macId="+params.get("macId"));
                         presenter.login(params);
                         showLoading();
                     } else {
                         Toast.makeText(this, "请输入正确的账户或密码", Toast.LENGTH_SHORT).show();
                     }
+                break;
+
+            case R.id.reset_tv:
+
+                Intent intent=new Intent(this, ResetActivity.class);
+                startActivity(intent);
+                finish();
                 break;
         }
     }
@@ -101,23 +119,30 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     public void loginSuccrss(LoginEntity loginEntity) {
         Log.d("Test","loginEntity="+loginEntity);
         onComplete();
-        if(loginEntity == null || loginEntity.getStatus() !=0 || loginEntity.getProfile() == null)
-            showError(1);
-        else{
-            UserInfoHelper.setUserInfo(this,loginEntity.getProfile());
+        if( loginEntity == null || loginEntity.getStatus() == 3){
+            Toast.makeText(this, "请使用自己的手机登录!", Toast.LENGTH_SHORT).show();
+        }
+        else if( loginEntity.getStatus() !=0 || loginEntity.getProfile() == null){
+            showError("404");
+        }
+        else if(loginEntity.getStatus() == 2){
+            Toast.makeText(this,"账号/密码错误，请重新输入！",Toast.LENGTH_SHORT).show();
+        }
+        else {
+
+            UserInfoHelper.setUserInfo(this, loginEntity.getProfile());
             EventBus.getDefault().postSticky("login!");
             Toast.makeText(this, "登录成功！正在跳转...", Toast.LENGTH_SHORT).show();
             finish();
         }
 
-
     }
 
     @Override
-    public void showError(int i) {
+    public void showError(String  error) {
 
-        if(i==1)
-            Toast.makeText(this, "账号密码错误，请重试！", Toast.LENGTH_SHORT).show();
+        if(error.contains("404"))
+            Toast.makeText(this, "请求异常，请重试！", Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(this,"网络异常，请检查网络连接！",Toast.LENGTH_SHORT).show();
     }

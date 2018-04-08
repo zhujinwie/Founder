@@ -23,7 +23,7 @@ public class MinePresenter extends MineContract.Presenter{
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        if(throwable.getMessage().contains("IllegalArgumentException"))
+                        if(throwable.getMessage().contains("IllegalArgumentException") || throwable.getMessage().contains("IllegalStateException"))
                             return;
                         else if(throwable.getMessage().contains("404"))
                             mView.onError(0);

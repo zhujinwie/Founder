@@ -24,7 +24,6 @@
             android:src="@mipmap/login_icon_user_name" />
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/agent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -36,7 +35,6 @@
                 android:id="@+id/agent_edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="phone"
                 android:maxLength="11"
                 android:maxLines="1"
                 android:textColor="@color/i333333"
@@ -105,7 +103,6 @@
             android:src="@mipmap/login_icon_password" />
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/paw1_tl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -139,7 +136,6 @@
             android:src="@mipmap/login_icon_password" />
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/paw2_tl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"

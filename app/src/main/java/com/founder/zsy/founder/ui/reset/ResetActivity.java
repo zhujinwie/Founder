@@ -4,18 +4,28 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.founder.zsy.founder.R;
 import com.founder.zsy.founder.bean.LoginEntity;
+import com.founder.zsy.founder.util.Code;
+import com.founder.zsy.founder.util.IDUtil;
+import com.founder.zsy.founder.util.MD5Util;
 import com.founder.zsy.founder.util.UserInfoHelper;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class ResetActivity extends AppCompatActivity implements ResetContract.View{
@@ -26,8 +36,21 @@ public class ResetActivity extends AppCompatActivity implements ResetContract.Vi
     Toolbar toolbar;
     @BindView(R.id.toolbar_title)
     TextView toolbarTitle;
+    @BindView(R.id.agent_edit)
+    EditText agentEt;
+    @BindView(R.id.code_edit)
+    EditText codeEt;
+    @BindView(R.id.showCode)
+    ImageView codeIv;
+    @BindView(R.id.paw1_edit)
+    EditText paw1Et;
+    @BindView(R.id.paw2_edit)
+    EditText paw2Et;
 
     ResetPresenter presenter;
+    private String code;
+    private IDUtil idUtil;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,7 +58,7 @@ public class ResetActivity extends AppCompatActivity implements ResetContract.Vi
         setContentView(R.layout.activity_reset);
         binder=ButterKnife.bind(this);
 
-        toolbarTitle.setText("个人主页");
+        toolbarTitle.setText("密码重设");
         toolbar.setNavigationIcon(R.mipmap.left_back);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +70,10 @@ public class ResetActivity extends AppCompatActivity implements ResetContract.Vi
         presenter=new ResetPresenter();
         presenter.attachView(this);
 
+        codeIv.setImageBitmap(Code.getInstance().createBitmap());
+        code= Code.getInstance().getCode().toLowerCase();
+
+        idUtil=new IDUtil();
     }
 
 
@@ -55,6 +82,83 @@ public class ResetActivity extends AppCompatActivity implements ResetContract.Vi
         super.onDestroy();
         binder.unbind();
         presenter.detachView();
+    }
+
+    @OnClick({R.id.showCode,R.id.reset})
+    void onClickView(View v){
+
+        switch(v.getId()){
+
+            case R.id.showCode:
+
+                codeIv.setImageBitmap(Code.getInstance().createBitmap());
+                code=Code.getInstance().getCode().toLowerCase();
+
+                break;
+
+            case R.id.reset:
+
+                //空判定
+                if(TextUtils.isEmpty(agentEt.getText().toString())){
+                    agentEt.setError("工号不能为空！");
+                    codeIv.setImageBitmap(Code.getInstance().createBitmap());
+                    code=Code.getInstance().getCode().toLowerCase();
+                    return;
+                }
+
+                if(TextUtils.isEmpty(codeEt.getText().toString())){
+
+                    codeEt.setError("验证码不能为空! ");
+                    codeIv.setImageBitmap(Code.getInstance().createBitmap());
+                    code=Code.getInstance().getCode().toLowerCase();
+                    return;
+                }
+
+                if(TextUtils.isEmpty(paw1Et.getText().toString())){
+
+                    paw1Et.setError("密码不能为空！");
+                    codeIv.setImageBitmap(Code.getInstance().createBitmap());
+                    code=Code.getInstance().getCode().toLowerCase();
+                    return;
+                }
+
+                if(TextUtils.isEmpty(paw2Et.getText().toString())){
+
+                    paw2Et.setError("确认密码不能为空！");
+                    codeIv.setImageBitmap(Code.getInstance().createBitmap());
+                    code=Code.getInstance().getCode().toLowerCase();
+                    return;
+                }
+                //验证码判定
+                if(!code.equals(codeEt.getText().toString().trim().toLowerCase())){
+                    Toast.makeText(this, "验证码输入错误！", Toast.LENGTH_SHORT).show();
+                    codeEt.setText("");
+                    codeIv.setImageBitmap(Code.getInstance().createBitmap());
+                    code=Code.getInstance().getCode().toLowerCase();
+                    return;
+                }
+                //重复密码判定
+                if(!paw1Et.getText().toString().equals(paw2Et.getText().toString())){
+
+                    Toast.makeText(this,"密码输入不一致！",Toast.LENGTH_SHORT).show();
+                    codeIv.setImageBitmap(Code.getInstance().createBitmap());
+                    code=Code.getInstance().getCode().toLowerCase();
+                    return;
+                }
+                //上传新密码
+
+                Map<String,String> params=new HashMap<>();
+               // params.put("agentId",agentEt.getText().toString());
+               // params.put("password",paw2Et.getText().toString());
+               // params.put("macId", TextUtils.isEmpty(IMEIUtil.IMEI)?IMEIUtil.getImei(this):IMEIUtil.IMEI);
+
+                params.put("agentId", MD5Util.getMD5_32_Value(agentEt.getText().toString()));
+                params.put("password",paw2Et.getText().toString());
+                params.put("macId",MD5Util.getMD5_32_Value(idUtil.getUUID(this)));
+                presenter.resetPwd(params);
+                showLoading();
+                break;
+        }
     }
 
     @Override

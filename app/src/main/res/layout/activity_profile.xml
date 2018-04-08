@@ -16,9 +16,7 @@
         />
     <RelativeLayout
         style="@style/myWeiXin"
-        android:layout_height="80dp"
-        android:id="@+id/pwl"
-        >
+        android:layout_height="80dp">
         <TextView
             style="@style/TitleStyle"
             android:text="头像"
@@ -59,9 +57,7 @@
         android:layout_height="1dp"
         android:background="@color/line"/>
     <RelativeLayout
-        style="@style/myWeiXin"
-        android:id="@+id/email"
-        >
+        style="@style/myWeiXin">
 
         <TextView
             style="@style/TitleStyle"
@@ -82,9 +78,7 @@
         android:layout_height="1dp"
         android:background="@color/line"/>
     <RelativeLayout
-        style="@style/myWeiXin"
-        android:id="@+id/tel"
-        >
+        style="@style/myWeiXin">
 
         <TextView
             style="@style/TitleStyle"
@@ -107,9 +101,7 @@
         android:background="@color/line"/>
 
     <RelativeLayout
-        style="@style/myWeiXin"
-        android:id="@+id/office"
-        >
+        style="@style/myWeiXin">
         <TextView
             style="@style/TitleStyle"
             android:text="部门"

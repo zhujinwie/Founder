@@ -1,6 +1,6 @@
 package com.founder.zsy.founder.ui.homepage;
 
-import android.util.Log;
+import android.text.TextUtils;
 
 import com.founder.zsy.founder.api.FoRetrofit;
 import com.founder.zsy.founder.bean.TotalEntity;
@@ -26,13 +26,12 @@ public class HomePresenter extends HomeContract.Presenter{
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        String msg=throwable.getMessage();
-                        Log.d("Test","policy-->throw.msg="+msg);
                         mView.onComplete();
-                        if(msg.contains("404")){
-                            return ;
-                        }
-                        mView.showError(0);
+                       if(!TextUtils.isEmpty(throwable.getMessage()) && throwable.getMessage().contains("404")){
+                           mView.showError(2);
+                       }else {
+                           mView.showError(0);
+                       }
                     }
                 });
 
@@ -51,13 +50,12 @@ public class HomePresenter extends HomeContract.Presenter{
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        String msg=throwable.getMessage();
-                        Log.d("Test","name-->throw.msg="+msg);
                         mView.onComplete();
-                        if(msg.contains("404")){
-                            return ;
+                        if(!TextUtils.isEmpty(throwable.getMessage()) && throwable.getMessage().contains("404")){
+                            mView.showError(2);
+                        }else {
+                            mView.showError(0);
                         }
-                        mView.showError(0);
                     }
                 });
     }

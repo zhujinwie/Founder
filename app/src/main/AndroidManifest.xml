@@ -55,7 +55,6 @@
         <activity android:name=".ui.login.LoginActivity" />
         <activity android:name=".ui.RegisterActivity" />
         <activity android:name=".ui.DetailsActivity"/>
-        <activity android:name=".ui.TestActivity"/>
         <activity android:name=".ui.profile.ProfileActivity"/>
         <activity android:name=".ui.reset.ResetActivity"/>
     </application>

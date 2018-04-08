@@ -23,6 +23,7 @@ import com.founder.zsy.founder.bean.TotalEntity;
 import com.founder.zsy.founder.ui.DetailsActivity;
 import com.founder.zsy.founder.ui.login.LoginActivity;
 import com.founder.zsy.founder.util.Code;
+import com.founder.zsy.founder.util.MD5Util;
 import com.founder.zsy.founder.util.UserInfoHelper;
 
 import java.util.HashMap;
@@ -73,6 +74,7 @@ public class HomeFragment extends Fragment implements HomeContract.View{
     Unbinder unbinder;
     private String code,name,policyNum;
     private HomePresenter presenter;
+    private Map<String,String> params;
     private int style;// 0: 保单查询 ， 1:姓名查询
     private int[] titleColors={R.color.colorAccent,R.color.white};
     private int[] backGrounds={R.drawable.tv_left_cornor_red,R.drawable.tv_left_cornor_white,R.drawable.tv_right_cornor_red,R.drawable.tv_right_cornor_white};
@@ -92,6 +94,7 @@ public class HomeFragment extends Fragment implements HomeContract.View{
         toolbarTitle.setText("首页");
         presenter=new HomePresenter();
         presenter.attachView(this);
+        params=new HashMap<>();
         return view;
     }
 
@@ -157,12 +160,12 @@ public class HomeFragment extends Fragment implements HomeContract.View{
 
                     if (text1Edit.getText().toString().trim().length() != 0) {
                         if (codeEdit.getText().toString().trim().equals(code)) {
-
                             showLoading();
                             name="-1";
                             policyNum=text1Edit.getText().toString().trim();
-                            Map<String,String> params=new HashMap<>();
-                            params.put("insureNo", text1Edit.getText().toString());
+                            policyNum=MD5Util.getMD5_32_Value(policyNum);
+                            params=new HashMap<>();
+                            params.put("insureNo", policyNum);
                             presenter.getPolicy(params);
                         }else {
                             Toast.makeText(getActivity(), "请输入正确的验证码", Toast.LENGTH_SHORT).show();
@@ -177,7 +180,8 @@ public class HomeFragment extends Fragment implements HomeContract.View{
                             showLoading();
                             policyNum="-1";
                             name=text2Edit.getText().toString().trim();
-                            Map<String,String> params=new HashMap<>();
+                            name=MD5Util.getMD5_32_Value(name);
+                            params=new HashMap<>();
                             params.put("page","1");
                             params.put("page_size","10");
                             params.put("insurerName",name);
@@ -198,6 +202,7 @@ public class HomeFragment extends Fragment implements HomeContract.View{
 
         onComplete();
         Intent intent=new Intent(getContext(), DetailsActivity.class);
+        Log.d("Test","intent.num = "+policyNum+" ; intent.name= "+name);
         intent.putExtra(DetailsActivity.EXTRA_CODE,policyNum);
         intent.putExtra(DetailsActivity.EXTRA_NAME,name);
         startActivity(intent);
@@ -231,8 +236,4 @@ public class HomeFragment extends Fragment implements HomeContract.View{
         policyTv.setClickable(true);
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
 }

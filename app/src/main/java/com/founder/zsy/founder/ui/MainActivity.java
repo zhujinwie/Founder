@@ -238,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
                 LocationBean locationBean=new LocationBean();
                 locationBean.setLa(location.getLatitude()+"");
                 locationBean.setLn(location.getLongitude()+"");
-
+                locationBean.setDesc(location.getLocationDescribe());
                 //sb.append("time : ");
                 /**
                  * 时间也可以使用systemClock.elapsedRealtime()方法 获取的是自从开机以来，每次回调的时间；

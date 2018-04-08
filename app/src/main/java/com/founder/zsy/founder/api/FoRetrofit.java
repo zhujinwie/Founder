@@ -14,9 +14,9 @@ public class FoRetrofit {
     //云服务器地址
     //private static final String BASE_URL="http://112.74.161.171/xh/";
     //局域网地址
-    //private static final String BASE_URL="http://192.168.0.105:8080/xh/";
+    private static final String BASE_URL="http://192.168.0.105:8080/xh/";
     //公司服务器地址
-    private static final String BASE_URL="http://139.199.94.154:8080/xh/";
+    //private static final String BASE_URL="http://139.199.94.154:8080/xh/";
     private static Retrofit mRestRetrofit;
 
     public static synchronized ApiStore getRestApi(){

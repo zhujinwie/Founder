@@ -48,7 +48,7 @@ public class DetailsActivity extends AppCompatActivity implements HomeContract.V
     public static final String EXTRA_NAME="name";
     public static final String EXTRA_CODE="code";
     private int page=1;
-    private int pageSize=1;
+    private int pageSize=1,type;
     private String name,policyNum;
     private HomePresenter presenter;
     private Unbinder binder;
@@ -154,11 +154,31 @@ public class DetailsActivity extends AppCompatActivity implements HomeContract.V
         policyNum=intent.getStringExtra(EXTRA_CODE);
         name=intent.getStringExtra(EXTRA_NAME);
 
+        if(policyNum != null && !policyNum .equals("-1")){
+            type=0;
+        }else{
+            type=1;
+        }
+
+
     }
 
     //数据更新逻辑
     private void refreshData(boolean isRefresh){
         isRefreshing=isRefresh;
+        Map<String,String> params=new HashMap<>();
+
+        if(type==0){
+            //单保单查询
+            if(isRefresh) {
+                params.put("insureNo", policyNum);
+                presenter.getPolicy(params);
+            }else{
+                setData(new ArrayList<PolicyEntity>());
+            }
+            return;
+        }
+
         if(isRefresh){
             //初次请求
             page=1;
@@ -166,11 +186,7 @@ public class DetailsActivity extends AppCompatActivity implements HomeContract.V
             if(isLoadMoreFailed) isLoadMoreFailed=false;
             page++;
         }
-        Map<String,String> params=new HashMap<>();
-        if(policyNum !=null && !policyNum.equals("-1")){
-            params.put("insureNo", policyNum);
-            presenter.getPolicy(params);
-        }else if(name != null && !name.equals("-1")){
+        if(name != null && !name.equals("-1")){
             params.put("page",page+"");
             params.put("page_size",pageSize+"");
             params.put("insurerName",name);
