@@ -1,6 +1,7 @@
 package com.founder.zsy.founder.ui.mine;
 
 import com.founder.zsy.founder.api.FoRetrofit;
+import com.founder.zsy.founder.bean.base.MsgEntity;
 
 import java.util.Map;
 
@@ -15,17 +16,17 @@ public class MinePresenter extends MineContract.Presenter{
 
         FoRetrofit.getRestApi().uploadLaLn(params).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Consumer<String>() {
+                .subscribe(new Consumer<MsgEntity>() {
                     @Override
-                    public void accept(String s) throws Exception {
-                        mView.uploadSuccess();
+                    public void accept(MsgEntity s) throws Exception {
+                        mView.uploadSuccess(s);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        if(throwable.getMessage().contains("IllegalArgumentException") || throwable.getMessage().contains("IllegalStateException"))
+                        if (throwable.getMessage().contains("IllegalArgumentException") || throwable.getMessage().contains("IllegalStateException"))
                             return;
-                        else if(throwable.getMessage().contains("404"))
+                        else if (throwable.getMessage().contains("404"))
                             mView.onError(0);
                         throwable.printStackTrace();
                     }

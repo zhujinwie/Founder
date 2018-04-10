@@ -2,6 +2,7 @@ package com.founder.zsy.founder.api;
 
 import com.founder.zsy.founder.bean.LoginEntity;
 import com.founder.zsy.founder.bean.TotalEntity;
+import com.founder.zsy.founder.bean.base.MsgEntity;
 
 import java.util.Map;
 
@@ -35,7 +36,7 @@ public interface ApiStore {
      * @return
      * **/
     @POST("Agent/getLocation.do")
-    Flowable<String> uploadLaLn(@QueryMap Map<String,String> params);
+    Flowable<MsgEntity> uploadLaLn(@QueryMap Map<String,String> params);
 
     /**
      * 登录

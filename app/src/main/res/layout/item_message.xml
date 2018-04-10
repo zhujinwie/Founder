@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/DIMEN_10PX"
+    app:cardElevation="@dimen/DIMEN_20PX"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:padding="4dp"
+        >
+        <TextView
+            android:id="@+id/time_tv"
+            android:text="时间:  ####"
+            style="@style/MyTextStyle"
+            />
+        <TextView
+            style="@style/MyTextStyle"
+            android:id="@+id/la_tv"
+            android:text="纬度： ####"
+            />
+        <TextView
+            style="@style/MyTextStyle"
+            android:id="@+id/ln_tv"
+            android:text="纬度: ####"
+             />
+        <TextView
+            style="@style/MyTextStyle"
+            android:id="@+id/desc_tv"
+            android:text="位置描述: 未知"
+            />
+        <TextView
+            style="@style/MyTextStyle"
+            android:id="@+id/type_tv"
+            android:text="定位类型:  未知"
+            />
+
+    </LinearLayout>
+
+
+
+</android.support.v7.widget.CardView>

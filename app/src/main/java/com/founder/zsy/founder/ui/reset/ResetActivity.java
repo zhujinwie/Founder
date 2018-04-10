@@ -2,9 +2,9 @@ package com.founder.zsy.founder.ui.reset;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.founder.zsy.founder.R;
 import com.founder.zsy.founder.bean.LoginEntity;
+import com.founder.zsy.founder.ui.base.BaseActivity;
 import com.founder.zsy.founder.util.Code;
 import com.founder.zsy.founder.util.IDUtil;
 import com.founder.zsy.founder.util.MD5Util;
@@ -28,7 +29,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-public class ResetActivity extends AppCompatActivity implements ResetContract.View{
+public class ResetActivity extends BaseActivity implements ResetContract.View{
 
     Unbinder binder;
 
@@ -156,6 +157,7 @@ public class ResetActivity extends AppCompatActivity implements ResetContract.Vi
                 params.put("password",paw2Et.getText().toString());
                 params.put("macId",MD5Util.getMD5_32_Value(idUtil.getUUID(this)));
                 presenter.resetPwd(params);
+                Log.d("Test","agentId="+params.get("agentId")+" ;password= "+params.get("paswword")+" ; macId="+params.get("macId"));
                 showLoading();
                 break;
         }
@@ -163,7 +165,7 @@ public class ResetActivity extends AppCompatActivity implements ResetContract.Vi
 
     @Override
     public void resetSuccess(LoginEntity loginEntity) {
-
+        onComplete();
         if(loginEntity == null)
             return;
         else if(loginEntity.getStatus() == 1){
@@ -171,7 +173,7 @@ public class ResetActivity extends AppCompatActivity implements ResetContract.Vi
         }else if(loginEntity.getStatus() == 2){
             Toast.makeText(this, "请使用自己的手机进行修改操作！", Toast.LENGTH_SHORT).show();
         }else if(loginEntity.getStatus() == 3){
-            Toast.makeText(this, "后台繁忙,请稍后重试！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "服务器繁忙,请稍后重试！", Toast.LENGTH_SHORT).show();
         }else{
 
             UserInfoHelper.setUserInfo(this,loginEntity.getProfile());
@@ -187,6 +189,11 @@ public class ResetActivity extends AppCompatActivity implements ResetContract.Vi
 
     @Override
     public void showLoading() {
+        showDialog("正在联系服务器...");
+    }
 
+    @Override
+    public void onComplete() {
+        closeDialog();
     }
 }

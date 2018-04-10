@@ -3,6 +3,4 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="name">登录/注册</string>
-    <string name="bd_server_exception">服务端网络定位失败，可以反馈IMEI号和大体定位时间到loc-bugs@baidu.com，会有人追查原因</string>
-
 </resources>

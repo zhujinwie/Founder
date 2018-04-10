@@ -9,12 +9,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
+import com.baidu.location.Poi;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
@@ -28,17 +29,16 @@ import com.founder.zsy.founder.ui.login.LoginActivity;
 import com.founder.zsy.founder.ui.mine.MyFragment;
 import com.founder.zsy.founder.util.StatusBarCompat;
 import com.founder.zsy.founder.util.UserInfoHelper;
-import com.github.clans.fab.FloatingActionButton;
-import com.github.clans.fab.FloatingActionMenu;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.OnNeverAskAgain;
@@ -53,12 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private LocationService locationService;
     @BindView(R.id.main_tab_layout)
     CommonTabLayout tabLayout;
-    @BindView(R.id.begin)
-    FloatingActionButton begin;
-    @BindView(R.id.stop)
-    FloatingActionButton stop;
-    @BindView(R.id.menu)
-    FloatingActionMenu menu;
+
     private String[] mTitles = {"首页", "我"};
     private int[] normal = {
             R.mipmap.tab_bar_btn_home_normal, R.mipmap.tab_bar_btn_my_normal};
@@ -69,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     private int currentIndex = 0;
     private Unbinder bind;
     private boolean type;
+    public static final int REQUEST_CODE_LOGIN=100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +93,27 @@ public class MainActivity extends AppCompatActivity {
         });
         location();
 
+        //启动时检查是否登录
+        checkIsLoginAndShowDialog();
+
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == REQUEST_CODE_LOGIN && resultCode == RESULT_OK){
+            //登录成功，可以定位了...
+
+            Log.d("Test","开始定位!");
+            startLocation();
+        }else{
+            //登录失败，
+            Toast.makeText(this,"未登录状态无法上传坐标！",Toast.LENGTH_LONG).show();
+            stopLocation();
+        }
+
     }
 
     private void location() {
@@ -114,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
     //默认显示的Fragment
     private void setDefaultFragment() {
         getSupportFragmentManager().beginTransaction().replace(R.id.main_parent, list.get(0)).commit();
-        menu.setVisibility(View.GONE);
+
     }
 
     private void switchFragment(int position) {
@@ -127,11 +144,7 @@ public class MainActivity extends AppCompatActivity {
             transaction.show(targetFragment).hide(currentFragment).commit();
         }
         currentIndex = position;
-        if(position==1){
-            menu.setVisibility(View.VISIBLE);
-        }else {
 
-        }
     }
 
     @Override
@@ -142,9 +155,33 @@ public class MainActivity extends AppCompatActivity {
         bind.unbind();
     }
 
-    @OnClick({R.id.begin, R.id.stop})
-    public void onViewClicked(View view) {
+    //开启定位
+    void startLocation(){
 
+        if (!type) {
+            MainActivityPermissionsDispatcher.needWithCheck(this);
+            type = true;
+            Toast.makeText(this, "定位开启", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "正在定位,请不要重复开启。", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    //停止定位
+    void stopLocation(){
+
+        if (type) {
+            locationService.stop();
+            type = false;
+            Toast.makeText(this, "定位停止", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "请开启定位", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    //检查是否登录
+    void checkIsLoginAndShowDialog(){
         if(!UserInfoHelper.isLogin(this)){
 
             new android.app.AlertDialog.Builder(this)
@@ -152,43 +189,35 @@ public class MainActivity extends AppCompatActivity {
                     .setPositiveButton("取消", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
+                            Toast.makeText(MainActivity.this,"未登录状态无法上传坐标！",Toast.LENGTH_LONG).show();
                             return;
                         }
                     })
                     .setNegativeButton("确定", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                            startActivityForResult(new Intent(MainActivity.this, LoginActivity.class),REQUEST_CODE_LOGIN);
                         }
                     }).show();
+        }else{
+            startLocation();
         }
+    }
 
+    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
+    public void onEvenetMainThread(String bean){
 
-        switch (view.getId()) {
-            case R.id.begin:
-
-                        if (!type) {
-                            MainActivityPermissionsDispatcher.needWithCheck(this);
-                            type = true;
-                            Toast.makeText(this, "定位开启", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(this, "正在定位,请不要重复开启。", Toast.LENGTH_SHORT).show();
-                        }
-
-                break;
-            case R.id.stop:
-
-                    if (type) {
-                        locationService.stop();
-                        type = false;
-                        Toast.makeText(this, "定位停止", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(this, "请开启定位", Toast.LENGTH_SHORT).show();
-                    }
-
-                break;
+        if(TextUtils.isEmpty(bean)) return;
+        if(bean.equals("login!")){
+            Log.d("Test","login接收成功！");
+            startLocation();
+        }else if(bean.equals("logout!")){
+            Log.d("Test","logou接收成功!");
+            stopLocation();
+        }else{
+            Log.d("Test","尼玛发生了什么啊！");
+            return;
         }
-        menu.toggle(false);
     }
 
 
@@ -232,13 +261,39 @@ public class MainActivity extends AppCompatActivity {
             // TODO Auto-generated method stub
             if (null != location && location.getLocType() != BDLocation.TypeServerError) {
                 if (location.getCity() != null) {
-                    Log.e("123123", "纬度" + location.getLocType() + "--经度" + location.getLongitude());
                 }
                 StringBuffer sb = new StringBuffer(256);
                 LocationBean locationBean=new LocationBean();
                 locationBean.setLa(location.getLatitude()+"");
                 locationBean.setLn(location.getLongitude()+"");
                 locationBean.setDesc(location.getLocationDescribe());
+                if (location.getPoiList() != null && !location.getPoiList().isEmpty()) {
+                    for (int i = 0; i < location.getPoiList().size(); i++) {
+                        Poi poi = (Poi) location.getPoiList().get(i);
+                        sb.append(poi.getName() + ";");
+                    }
+                }
+                locationBean.setPoi(sb.toString());
+                locationBean.setTime(location.getTime());
+                if(location.getLocType() == BDLocation.TypeGpsLocation){
+                    locationBean.setType(0);//GPS定位
+                }else if(location.getLocType() == BDLocation.TypeNetWorkLocation){
+                    locationBean.setType(1);//网络定位
+                }else if(location.getLocType() == BDLocation.TypeOffLineLocation){
+                    locationBean.setType(2);
+                }else if (location.getLocType() == BDLocation.TypeServerError) {
+                    //sb.append("\ndescribe : ");
+                    //sb.append("服务端网络定位失败，可以反馈IMEI号和大体定位时间到loc-bugs@baidu.com，会有人追查原因");
+                    locationBean.setType(101);
+                } else if (location.getLocType() == BDLocation.TypeNetWorkException) {
+                    // sb.append("\ndescribe : ");
+                    // sb.append("网络不同导致定位失败，请检查网络是否通畅");
+                    locationBean.setType(102);
+                } else if (location.getLocType() == BDLocation.TypeCriteriaException) {
+                    //sb.append("\ndescribe : ");
+                    //sb.append("无法获取有效定位依据导致定位失败，一般是由于手机的原因，处于飞行模式下一般会造成这种结果，可以试着重启手机");
+                    locationBean.setType(103);
+                }
                 //sb.append("time : ");
                 /**
                  * 时间也可以使用systemClock.elapsedRealtime()方法 获取的是自从开机以来，每次回调的时间；
@@ -301,19 +356,7 @@ public class MainActivity extends AppCompatActivity {
 //                    sb.append("\ndescribe : ");
 //                    sb.append("离线定位成功，离线定位结果也是有效的");
 //                } else
-                if (location.getLocType() == BDLocation.TypeServerError) {
-                    //sb.append("\ndescribe : ");
-                    //sb.append("服务端网络定位失败，可以反馈IMEI号和大体定位时间到loc-bugs@baidu.com，会有人追查原因");
-                    locationBean.setException(1);
-                } else if (location.getLocType() == BDLocation.TypeNetWorkException) {
-                   // sb.append("\ndescribe : ");
-                   // sb.append("网络不同导致定位失败，请检查网络是否通畅");
-                    locationBean.setException(2);
-                } else if (location.getLocType() == BDLocation.TypeCriteriaException) {
-                    //sb.append("\ndescribe : ");
-                    //sb.append("无法获取有效定位依据导致定位失败，一般是由于手机的原因，处于飞行模式下一般会造成这种结果，可以试着重启手机");
-                    locationBean.setException(3);
-                }
+
                 EventBus.getDefault().postSticky(locationBean);
             }
         }

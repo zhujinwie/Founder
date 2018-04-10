@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +20,7 @@ import android.widget.Toast;
 import com.founder.zsy.founder.R;
 import com.founder.zsy.founder.bean.TotalEntity;
 import com.founder.zsy.founder.ui.DetailsActivity;
+import com.founder.zsy.founder.ui.base.BaseFragment;
 import com.founder.zsy.founder.ui.login.LoginActivity;
 import com.founder.zsy.founder.util.Code;
 import com.founder.zsy.founder.util.MD5Util;
@@ -38,7 +38,7 @@ import butterknife.Unbinder;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment implements HomeContract.View{
+public class HomeFragment extends BaseFragment implements HomeContract.View{
 
 
     @BindView(R.id.toolbar_title)
@@ -53,8 +53,6 @@ public class HomeFragment extends Fragment implements HomeContract.View{
     TextInputLayout codes;
     @BindView(R.id.showCode)
     ImageView showCode;
-    @BindView(R.id.progressbar)
-    ProgressBar progressBar;
     @BindView(R.id.select)
     TextView select;
     @BindView(R.id.policy_style)
@@ -202,7 +200,6 @@ public class HomeFragment extends Fragment implements HomeContract.View{
 
         onComplete();
         Intent intent=new Intent(getContext(), DetailsActivity.class);
-        Log.d("Test","intent.num = "+policyNum+" ; intent.name= "+name);
         intent.putExtra(DetailsActivity.EXTRA_CODE,policyNum);
         intent.putExtra(DetailsActivity.EXTRA_NAME,name);
         startActivity(intent);
@@ -211,7 +208,6 @@ public class HomeFragment extends Fragment implements HomeContract.View{
     @Override
     public void showError(int code) {
 
-        Log.d("Home","界面报错了！...");
         if(code == 1){
             //没有内容
             Toast.makeText(getContext(), "保单号/姓名输入错误！", Toast.LENGTH_SHORT).show();
@@ -224,14 +220,14 @@ public class HomeFragment extends Fragment implements HomeContract.View{
 
     @Override
     public void showLoading() {
-        progressBar.setVisibility(View.VISIBLE);
+        showDialog("查询中...");
         nameTv.setClickable(false);
         policyTv.setClickable(false);
     }
 
     @Override
     public void onComplete() {
-        progressBar.setVisibility(View.INVISIBLE);
+        closeDialog();
         nameTv.setClickable(true);
         policyTv.setClickable(true);
     }

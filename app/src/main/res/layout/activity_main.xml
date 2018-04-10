@@ -30,12 +30,5 @@
         tl:tl_textSelectColor="#ce000c"
         tl:tl_textUnselectColor="@color/i929292"
         tl:tl_textsize="12sp" />
-    <include
-        android:layout_above="@+id/line"
-        layout="@layout/fab_menu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="@dimen/DIMEN_32PX"
-        android:layout_marginRight="@dimen/DIMEN_32PX" />
+
 </RelativeLayout>

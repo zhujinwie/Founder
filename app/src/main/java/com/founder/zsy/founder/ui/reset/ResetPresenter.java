@@ -23,8 +23,8 @@ public class ResetPresenter extends ResetContract.Presenter {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-
-
+                        mView.onComplete();
+                        throwable.printStackTrace();
                     }
                 });
     }
