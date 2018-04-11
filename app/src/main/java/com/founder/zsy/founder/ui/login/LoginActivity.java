@@ -148,5 +148,4 @@ public class LoginActivity extends BaseActivity implements LoginContract.View{
         closeDialog();
     }
 
-
 }
