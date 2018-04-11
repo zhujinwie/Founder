@@ -152,7 +152,7 @@ public class MyFragment extends BaseFragment implements MineContract.View {
     @Override
     public void uploadSuccess(MsgEntity msg) {
 
-        if(msg == null){
+        if(msg == null){  
             onError(0);
         }else if(msg.getStatus() == 0){
             //TODO 上传定位成功！更新通知栏
