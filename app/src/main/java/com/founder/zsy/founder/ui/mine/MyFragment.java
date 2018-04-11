@@ -156,7 +156,6 @@ public class MyFragment extends BaseFragment implements MineContract.View {
             onError(0);
         }else if(msg.getStatus() == 0){
             //TODO 上传定位成功！更新通知栏
-            adapter.addData(list);
             adapter.notifyDataSetChanged();
             rcv.scrollToPosition(adapter.getItemCount()-1);
         }else if(msg.getStatus() == 2){
