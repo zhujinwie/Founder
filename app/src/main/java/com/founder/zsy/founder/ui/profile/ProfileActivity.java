@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.founder.zsy.founder.R;
 import com.founder.zsy.founder.bean.base.ProfileEntity;
@@ -89,7 +90,8 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         UserInfoHelper.clearUserInfo(ProfileActivity.this);
-                        EventBus.getDefault().post("logout!");
+                        Toast.makeText(ProfileActivity.this,"您已经退出登录！",Toast.LENGTH_SHORT).show();
+                        EventBus.getDefault().postSticky("logout!");
                         finish();
                     }
                 }).show();

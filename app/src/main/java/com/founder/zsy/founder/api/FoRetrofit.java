@@ -21,26 +21,19 @@ public class FoRetrofit {
     private static Retrofit mRestRetrofit;
 
     public static synchronized ApiStore getRestApi(){
-
         if(mRestRetrofit == null ){
-
             OkHttpClient.Builder builder=new OkHttpClient.Builder();
             builder.retryOnConnectionFailure(false)
                     .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
                     .writeTimeout(TIME_OUT,TimeUnit.SECONDS)
                     .readTimeout(TIME_OUT,TimeUnit.SECONDS);
-
-
             mRestRetrofit= new Retrofit.Builder()
                             .addConverterFactory(GsonConverterFactory.create())
                             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                             .baseUrl(BASE_URL)
                             .build();
-
         }
-
         return mRestRetrofit.create(ApiStore.class);
     }
-
 
 }

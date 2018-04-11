@@ -8,7 +8,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +47,7 @@ public class DetailsActivity extends AppCompatActivity implements HomeContract.V
     public static final String EXTRA_NAME="name";
     public static final String EXTRA_CODE="code";
     private int page=1;
-    private int pageSize=1;
+    private int pageSize=1,type;
     private String name,policyNum;
     private HomePresenter presenter;
     private Unbinder binder;
@@ -154,11 +153,31 @@ public class DetailsActivity extends AppCompatActivity implements HomeContract.V
         policyNum=intent.getStringExtra(EXTRA_CODE);
         name=intent.getStringExtra(EXTRA_NAME);
 
+        if(policyNum != null && !policyNum .equals("-1")){
+            type=0;
+        }else{
+            type=1;
+        }
+
+
     }
 
     //数据更新逻辑
     private void refreshData(boolean isRefresh){
         isRefreshing=isRefresh;
+        Map<String,String> params=new HashMap<>();
+
+        if(type==0){
+            //单保单查询
+            if(isRefresh) {
+                params.put("insureNo", policyNum);
+                presenter.getPolicy(params);
+            }else{
+                setData(new ArrayList<PolicyEntity>());
+            }
+            return;
+        }
+
         if(isRefresh){
             //初次请求
             page=1;
@@ -166,11 +185,7 @@ public class DetailsActivity extends AppCompatActivity implements HomeContract.V
             if(isLoadMoreFailed) isLoadMoreFailed=false;
             page++;
         }
-        Map<String,String> params=new HashMap<>();
-        if(policyNum !=null && !policyNum.equals("-1")){
-            params.put("insureNo", policyNum);
-            presenter.getPolicy(params);
-        }else if(name != null && !name.equals("-1")){
+        if(name != null && !name.equals("-1")){
             params.put("page",page+"");
             params.put("page_size",pageSize+"");
             params.put("insurerName",name);
@@ -181,7 +196,7 @@ public class DetailsActivity extends AppCompatActivity implements HomeContract.V
     //加载判定
     private void setData(List<PolicyEntity> datas){
 
-        Log.d("Test","datas.length="+datas.size());
+        //Log.d("Test","datas.length="+datas.size());
         refreshLayout.setRefreshing(false);
         adapter.isUseEmpty(true);
         if(isRefreshing){
@@ -215,20 +230,16 @@ public class DetailsActivity extends AppCompatActivity implements HomeContract.V
 
     @Override
     public void getPolicySuccess(TotalEntity totalEntity) {
-        Log.d("Test","getPolicySuccess -- > "+totalEntity);
         if(totalEntity == null || totalEntity.getStatus() == 1){
-            Log.d("Test","获得空数据。。");
             showError(0);
         }
         else if(totalEntity.getStatus() == 2){
-            Log.d("Test","错误的请求!");
             showError(1);
         }
         else{
             List<PolicyEntity> datas=totalEntity.getBus();
 
             if(datas == null || datas.size() ==0){
-                Log.d("Test","没有更多数据了!");
                 adapter.loadMoreEnd();
                 return;
             }
@@ -238,13 +249,10 @@ public class DetailsActivity extends AppCompatActivity implements HomeContract.V
 
     @Override
     public void showError(int code) {
-
         if(isRefreshing){
-
             adapter.setEmptyView(errorView);
             adapter.notifyDataSetChanged();
         }else{
-
             adapter.loadMoreFail();
         }
     }

@@ -11,7 +11,7 @@ public interface LoginContract {
 
         void loginSuccrss(LoginEntity loginEntity);
 
-        void showError(int code);
+        void showError(String code);
 
         void showLoading();
 

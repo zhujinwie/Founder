@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context="com.founder.zsy.founder.ui.LoginActivity">
+    tools:context="com.founder.zsy.founder.ui.login.LoginActivity">
 
     <include layout="@layout/toolbar_title" />
 
@@ -46,8 +46,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/DIMEN_30PX"
-        >
+        android:layout_marginTop="@dimen/DIMEN_30PX">
 
         <ImageView
             android:id="@+id/paw1"
@@ -75,17 +74,16 @@
                 android:textColor="@color/i333333"
                 android:textColorHint="@color/i666666"
                 android:textSize="16sp" />
-
         </android.support.design.widget.TextInputLayout>
 
         <TextView
             android:id="@+id/reset_tv"
             android:layout_width="100dp"
             android:layout_height="40dp"
-            android:layout_alignEnd="@+id/paw"
-            android:layout_alignParentTop="true"
+           android:layout_alignRight="@+id/paw"
             android:gravity="center"
             android:text="忘记密码" />
+
 
     </RelativeLayout>
 
@@ -117,16 +115,5 @@
         android:textSize="16sp"
         android:visibility="gone"
         />
-    <ProgressBar
-        android:id="@+id/progressbar"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="@dimen/DIMEN_64PX"
-        android:layout_marginRight="@dimen/DIMEN_64PX"
-        android:layout_marginTop="@dimen/DIMEN_160PX"
-        android:paddingBottom="@dimen/DIMEN_24PX"
-        android:paddingTop="@dimen/DIMEN_24PX"
-        android:visibility="invisible"/>
 
 </LinearLayout>

@@ -7,11 +7,36 @@ import java.io.Serializable;
  */
 public class LocationBean implements Serializable{
 
-
+    private String desc; //位置描述
     private String la; // 纬度
     private String ln; // 经度
-    private int exception;// 0: OK
-    // 1 :server error , 2: network error , 3: phone error
+    private int type; // 定位类型 0 gps , 1 net , 2 offline , 101 102 103 error
+    private String time; //
+    private String poi;// 位置的poi信息
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getPoi() {
+        return poi;
+    }
+
+    public void setPoi(String poi) {
+        this.poi = poi;
+    }
 
     public String getLa() {
         return la;
@@ -29,20 +54,23 @@ public class LocationBean implements Serializable{
         this.ln = ln;
     }
 
-    public int getException() {
-        return exception;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setException(int exception) {
-        this.exception = exception;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     @Override
     public String toString() {
         return "LocationBean{" +
-                "la='" + la + '\'' +
+                "desc='" + desc + '\'' +
+                ", la='" + la + '\'' +
                 ", ln='" + ln + '\'' +
-                ", exception=" + exception +
+                ", type=" + type +
+                ", time='" + time + '\'' +
+                ", poi='" + poi + '\'' +
                 '}';
     }
 }

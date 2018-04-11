@@ -1,5 +1,7 @@
 package com.founder.zsy.founder.ui.login;
 
+import android.text.TextUtils;
+
 import com.founder.zsy.founder.api.FoRetrofit;
 import com.founder.zsy.founder.bean.LoginEntity;
 
@@ -26,14 +28,8 @@ public class LoginPresenter extends LoginContract.Presenter {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
                         mView.onComplete();
-                        if(throwable.getMessage().contains("404")||throwable.getMessage().contains("ConnectException"))
-                            mView.showError(0);
-                        if(throwable.getMessage().contains("IllegalStateException"))
-                            return;
-                        else {
-                            mView.showError(1);
-                            throwable.printStackTrace();
-                        }
+                        throwable.printStackTrace();
+                        mView.showError(TextUtils.isEmpty(throwable.getMessage())?"消失在异次元了...":throwable.getMessage());
                         }
                 });
     }

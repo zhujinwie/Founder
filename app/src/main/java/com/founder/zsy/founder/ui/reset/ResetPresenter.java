@@ -23,11 +23,8 @@ public class ResetPresenter extends ResetContract.Presenter {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-
-                        if(throwable.getMessage().contains("404"))
-                            mView.showError(1);
-                        else
-                            mView.showError(2);
+                        mView.onComplete();
+                        throwable.printStackTrace();
                     }
                 });
     }

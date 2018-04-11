@@ -1,44 +1,38 @@
 package com.founder.zsy.founder.util;
 
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
-/**
- * MD5 加密类
- * 用于登陆，保单号查询加密
- *
- * **/
 public class MD5Util {
 
-    /**
-     *@Description: MD5加密 32位小写
-     * **/
-    public static String encrypt32(String encryptStr) {
-        MessageDigest md5;
+    public static String getMD5_32_Value(String secret){
         try {
-            md5 = MessageDigest.getInstance("MD5");
-            byte[] md5Bytes = md5.digest(encryptStr.getBytes());
-            StringBuffer hexValue = new StringBuffer();
-            for (int i = 0; i < md5Bytes.length; i++) {
-                int val = ((int) md5Bytes[i]) & 0xff;
-                if (val < 16)
-                    hexValue.append("0");
-                hexValue.append(Integer.toHexString(val));
+            MessageDigest bmd5 = MessageDigest.getInstance("MD5");
+            bmd5.update(secret.getBytes());
+            int i;
+            StringBuffer buf = new StringBuffer();
+            byte[] b = bmd5.digest();// 加密
+            for (int offset = 0; offset < b.length; offset++) {
+                i = b[offset];
+                if (i < 0)
+                    i += 256;
+                if (i < 16)
+                    buf.append("0");
+                buf.append(Integer.toHexString(i));
             }
-            encryptStr = hexValue.toString();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            return buf.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
-        return encryptStr;
+        return "";
+
     }
 
-    /**
-     * @Description: MD5加密 16位小写
-     * **/
-    public static String encrypt16(String encryptStr){
-        return encrypt32(encryptStr).substring(8,24);
+    public static String getMD5_16_Value(String s){
+
+        return getMD5_32_Value(s).substring(8,24);
     }
-
-
-
 
 }
+
+

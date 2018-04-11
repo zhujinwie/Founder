@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:orientation="horizontal"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="34dp"
         android:paddingLeft="12dp"
         android:paddingRight="12dp"
         >
@@ -173,17 +173,5 @@
         android:text="查询"
         android:textColor="@color/white"
         android:textSize="16sp" />
-
-    <ProgressBar
-        android:id="@+id/progressbar"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="@dimen/DIMEN_64PX"
-        android:layout_marginRight="@dimen/DIMEN_64PX"
-        android:layout_marginTop="@dimen/DIMEN_160PX"
-        android:paddingBottom="@dimen/DIMEN_24PX"
-        android:paddingTop="@dimen/DIMEN_24PX"
-        android:visibility="invisible"/>
 
 </LinearLayout>
